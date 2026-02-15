@@ -20,6 +20,7 @@
     "publish-sdk": "lerna publish"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.10.0",
     "@types/ssh2-sftp-client": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",

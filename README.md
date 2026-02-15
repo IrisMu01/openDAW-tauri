@@ -72,34 +72,34 @@ Cal Lycus, Jetdarc, Truls Enstad, Polarity, Ynot Etluhcs, Mats Gisselson, Ola, S
 
 #### Stock Plugins
 
-* Vaporisateur (subtractive synth with classical waveforms)
-* Playfield (sample drum computer with individual effect chains)
-* Nano (nano sampler for a single audio file)
-* Tape (playback device for audio regions and clips)
-* Soundfont (soundfont player)
-* MIDI Output (sends MIDI messages to other devices)
-* Stereo Tool (volume, panning and invert the stereo signal)
-* Delay (stereo delay with cross and filter options)
-* Crusher (degenerates audio signal)
-* Cheap Reverb (FreeVerb variation)
-* Revamp (graphical equalizer with spectrum analyser)
-* Arpeggio (plays the notes of a chord one after another)
-* Pitch (offsets midi note pitches)
-* Zeitgeist (transforms time)
-* Velocity (manipulates velocities of incoming notes)
-* Fold (waveform folding algorithm with oversampling)
-* Tidal (shapes rhythm and space through volume and pan)
-* Dattorro Reverb (dense algorithmic reverb based on Dattorro's design)
+- Vaporisateur (subtractive synth with classical waveforms)
+- Playfield (sample drum computer with individual effect chains)
+- Nano (nano sampler for a single audio file)
+- Tape (playback device for audio regions and clips)
+- Soundfont (soundfont player)
+- MIDI Output (sends MIDI messages to other devices)
+- Stereo Tool (volume, panning and invert the stereo signal)
+- Delay (stereo delay with cross and filter options)
+- Crusher (degenerates audio signal)
+- Cheap Reverb (FreeVerb variation)
+- Revamp (graphical equalizer with spectrum analyser)
+- Arpeggio (plays the notes of a chord one after another)
+- Pitch (offsets midi note pitches)
+- Zeitgeist (transforms time)
+- Velocity (manipulates velocities of incoming notes)
+- Fold (waveform folding algorithm with oversampling)
+- Tidal (shapes rhythm and space through volume and pan)
+- Dattorro Reverb (dense algorithmic reverb based on Dattorro's design)
 
 #### Ported Plugins (Excluded in commercial license)
 
-* [Compressor](https://github.com/p-hlp/CTAGDRC) (CTAG Dynamic Range Compressor)
+- [Compressor](https://github.com/p-hlp/CTAGDRC) (CTAG Dynamic Range Compressor)
 
 ### Repositories
 
-* [openDAW](https://github.com/andremichelle/opendaw)
-* [openDAW-headless (SDK)](https://github.com/andremichelle/opendaw-headless)
-* [openDAW-headless @naomiaro](https://github.com/naomiaro/opendaw-test) (openDAW-headless fork with more docs and
+- [openDAW](https://github.com/andremichelle/opendaw)
+- [openDAW-headless (SDK)](https://github.com/andremichelle/opendaw-headless)
+- [openDAW-headless @naomiaro](https://github.com/naomiaro/opendaw-test) (openDAW-headless fork with more docs and
   examples)
 
 ### Roadmap
@@ -109,16 +109,16 @@ evolves.
 
 #### 2025/Q4
 
-- [X] Preset API
-- [X] Full implementation of connecting several cloud services to store samples, projects, and presets
-- [X] Implement audio playback algorithms (pitch, stretch, absolute) including interpolation
+- [x] Preset API
+- [x] Full implementation of connecting several cloud services to store samples, projects, and presets
+- [x] Implement audio playback algorithms (pitch, stretch, absolute) including interpolation
 
 #### 2026/Q1
 
-- [X] Fade-in and out on audio-regions
-- [X] Signature automation track
-- [X] Tempo automation track
-- [X] Fine-tune recording including loops (takes)
+- [x] Fade-in and out on audio-regions
+- [x] Signature automation track
+- [x] Tempo automation track
+- [x] Fine-tune recording including loops (takes)
 
 #### 2026/Q2
 
@@ -143,13 +143,13 @@ evolves.
 openDAW tries to avoid external libraries and frameworks. The following is a list of the external libraries we currently
 use in the web studio:
 
-* [jszip](https://www.npmjs.com/package/jszip) (for openDAW project bundle file)
-* [markdown-it](https://www.npmjs.com/package/markdown-it) + [markdown-it-table](https://www.npmjs.com/package/markdown-it-table) (
+- [jszip](https://www.npmjs.com/package/jszip) (for openDAW project bundle file)
+- [markdown-it](https://www.npmjs.com/package/markdown-it) + [markdown-it-table](https://www.npmjs.com/package/markdown-it-table) (
   for help pages)
-* [d3-force](https://d3js.org/d3-force) (for graph debugging)
-* [soundfont2](https://github.com/Mrtenz/soundfont2) (for soundfont loading)
-* [zod](https://zod.dev) (schema validation)
-* [ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm) (decoding/encoding)
+- [d3-force](https://d3js.org/d3-force) (for graph debugging)
+- [soundfont2](https://github.com/Mrtenz/soundfont2) (for soundfont loading)
+- [zod](https://zod.dev) (schema validation)
+- [ffmpeg](https://github.com/ffmpegwasm/ffmpeg.wasm) (decoding/encoding)
 
 Before starting, ensure you have the following installed on your system:
 
@@ -166,18 +166,27 @@ Before starting, ensure you have the following installed on your system:
   installed on
   your system. Most Linux/macOS systems have OpenSSL pre-installed.
 
+To work with the Tauri desktop build, ensure you also have [Rust](https://rust-lang.org/tools/install/) installed.
+
 ### Clone
 
 `git clone https://github.com/andremichelle/opendaw.git && cd opendaw`
 
 ### Installation
 
-* `npm run cert` (only for the very first time)
-* `npm run clean` (to revert to clean slate, removes all `node_modules` and `dist` folders)
-* `npm install` (for the first time and after `npm run clean`)
-* `npm run build` (for the first time and after `npm run clean`)
-* `npm run dev:studio` | `npm run dev:headless` (start dev server)
-* Navigate to https://localhost:8080 (port is important > cors sample api)
+- `npm run cert` (only for the very first time)
+- `npm run clean` (to revert to clean slate, removes all `node_modules` and `dist` folders)
+- `npm install` (for the first time and after `npm run clean`)
+- `npm run build` (for the first time and after `npm run clean`)
+- `npm run dev:studio` | `npm run dev:headless` (start dev server)
+- Navigate to https://localhost:8080 (port is important > cors sample api)
+
+### Running Locally As Desktop App
+
+- Complete all installation steps above, except for `npm run dev:studio`. Running both will result in OpenDAW running on 2 localhost ports.
+- Make sure you have Rust installed
+- cd to the `src-tauri` subdirectory
+- `cargo tauri dev` (start dev server). The Desktop webview should open automatically soon.
 
 ### Flow Charts
 
@@ -187,7 +196,7 @@ Before starting, ensure you have the following installed on your system:
 
 [![Custom Caption: Watch the Demo](https://img.youtube.com/vi/VPTXeJY6Eaw/0.jpg)](https://www.youtube.com/watch?v=VPTXeJY6Eaw)
 
-Watch Polarity's Video *"there's a new FREE DAW in town"*
+Watch Polarity's Video _"there's a new FREE DAW in town"_
 
 ## Get Involved
 
@@ -209,31 +218,31 @@ participate, visit our [Contribute](https://opendaw.org/contribute) page.
 
 ## Links
 
-* [opendaw.studio (prototype)](https://opendaw.studio)
-* [opendaw.org (website)](https://opendaw.org)
-* [openDAW on Discord](https://discord.opendaw.studio)
-* [openDAW SDK](https://www.npmjs.com/org/opendaw)
-* [LinkedIn](https://www.linkedin.com/company/opendaw-org/)
-* [Instagram](https://www.instagram.com/opendaw.studio)
+- [opendaw.studio (prototype)](https://opendaw.studio)
+- [opendaw.org (website)](https://opendaw.org)
+- [openDAW on Discord](https://discord.opendaw.studio)
+- [openDAW SDK](https://www.npmjs.com/org/opendaw)
+- [LinkedIn](https://www.linkedin.com/company/opendaw-org/)
+- [Instagram](https://www.instagram.com/opendaw.studio)
 
 ## Contributions
 
 ### Icons
 
-* "Wave" by Gregor Cresnar
+- "Wave" by Gregor Cresnar
   from [Noun Project](https://thenounproject.com/icon/wave-6250020/) (CC BY 3.0)
-* "Compress" by Gregor Cresnar
+- "Compress" by Gregor Cresnar
   from [Noun Project](https://thenounproject.com/browse/icons/term/compress/) (CC BY 3.0)
-* "Waveforms" by [Austin Andrews](https://github.com/Templarian/MaterialDesign)
-* "futurism" by Martin Königsmann from [Noun Project](https://thenounproject.com/icon/futurism-4565401/)
-* "tape reel" by Evgeny Filatov from [thenounproject](https://thenounproject.com/icon/tape-reel-2216293/)
+- "Waveforms" by [Austin Andrews](https://github.com/Templarian/MaterialDesign)
+- "futurism" by Martin Königsmann from [Noun Project](https://thenounproject.com/icon/futurism-4565401/)
+- "tape reel" by Evgeny Filatov from [thenounproject](https://thenounproject.com/icon/tape-reel-2216293/)
 
 ## Dual-Licensing Model
 
 openDAW is available **under two alternative license terms**:
 
 | Option                    | When to choose it                                                                                                    | Obligations                                                                                                                                                                                                                                                       |
-|---------------------------|----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **A. AGPL v3 (or later)** | You are happy for the entire work that includes openDAW to be released under AGPL-compatible open-source terms.      | – Must distribute complete corresponding source code under AGPL.<br>– Must keep copyright & licence notices.<br>– Applies both to distribution **and** to public use via network/SaaS (§13).<br>– May run openDAW privately in any software, open or closed (§0). |
 | **B. Commercial Licence** | You wish to incorporate openDAW into **closed-source** or otherwise licence-incompatible software or SaaS offerings. | – Pay the agreed fee.<br>– No copyleft requirement for your own source code.<br>– Other terms as per the signed agreement.                                                                                                                                        |
 
