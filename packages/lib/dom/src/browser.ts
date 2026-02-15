@@ -12,7 +12,7 @@ export namespace Browser {
     export const isFirefox = () => hasNavigator && navigator.userAgent.toLowerCase().includes("firefox")
     export const isWeb = () => !isTauriApp()
     export const isVitest = typeof process !== "undefined" && process.env?.VITEST === "true"
-    export const isTauriApp = () => "__TAURI__" in window
+    export const isTauriApp = () => "origin" in window && window.origin === "tauri://localhost"
     export const userAgent = hasNavigator ? navigator.userAgent
         .replace(/^Mozilla\/[\d.]+\s*/, "")
         .replace(/\bAppleWebKit\/[\d.]+\s*/g, "")

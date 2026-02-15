@@ -4,8 +4,9 @@ import workletsUrl from "@opendaw/studio-core/processors.js?url"
 import offlineEngineUrl from "@opendaw/studio-core/offline-engine.js?worker&url"
 import {boot} from "@/boot"
 import {initializeColors} from "@opendaw/studio-enums"
+import { Browser } from "@opendaw/lib-dom"
 
-if (window.crossOriginIsolated) {
+if (window.crossOriginIsolated || Browser.isTauriApp()) {
     const now = Date.now()
     initializeColors(document.documentElement)
     boot({workersUrl, workletsUrl, offlineEngineUrl}).then(() => console.debug(`Booted in ${Math.ceil(Date.now() - now)}ms`))
