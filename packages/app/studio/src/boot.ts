@@ -13,7 +13,7 @@ import {testFeatures} from "@/features.ts"
 import {MissingFeature} from "@/ui/MissingFeature.tsx"
 import {UpdateMessage} from "@/ui/UpdateMessage.tsx"
 import {showStoragePersistDialog} from "@/AppDialogs"
-import {network, Promises} from "@opendaw/lib-runtime"
+import {Promises} from "@opendaw/lib-runtime"
 import {AnimationFrame, Browser, Html, ShortcutManager} from "@opendaw/lib-dom"
 import {AudioOutputDevice} from "@/audio/AudioOutputDevice"
 import {FontLoader} from "@/ui/FontLoader"
@@ -57,8 +57,6 @@ export const boot = async ({workersUrl, workletsUrl, offlineEngineUrl}: {
         replaceChildren(document.body, MissingFeature({error: testFeaturesResult.error}))
         return
     }
-    console.debug("isTauriApp", Browser.isTauriApp())
-    await network.setTauriFetch(Browser.isTauriApp())
     console.debug("isLocalHost", Browser.isLocalHost())
     console.debug("agent", Browser.userAgent)
     const sampleRate = Browser.isFirefox() ? undefined : 48000

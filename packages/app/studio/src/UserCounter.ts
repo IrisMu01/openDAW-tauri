@@ -1,6 +1,5 @@
 import {int, Notifier, Procedure} from "@opendaw/lib-std"
 import {Browser} from "@opendaw/lib-dom"
-import { network } from "@opendaw/lib-runtime"
 
 export class UserCounter {
     readonly #sessionId: string
@@ -17,7 +16,7 @@ export class UserCounter {
 
     async #sendHeartbeat(): Promise<void> {
         try {
-            const response = await network.defaultFetch(this.#apiUrl, {
+            const response = await fetch(this.#apiUrl, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({sessionId: this.#sessionId})

@@ -186,7 +186,7 @@ To work with the Tauri desktop build, ensure you also have [Rust](https://rust-l
 - Complete all installation steps above, except for `npm run dev:studio`. Running both will result in OpenDAW running on 2 localhost ports.
 - Make sure you have Rust installed
 - cd to the `src-tauri` subdirectory
-- Run`cargo tauri dev` (starts dev server). The Desktop webview should open automatically soon.
+- `cargo tauri dev` (start dev server). The Desktop webview should open automatically soon.
 
 ### Flow Charts
 

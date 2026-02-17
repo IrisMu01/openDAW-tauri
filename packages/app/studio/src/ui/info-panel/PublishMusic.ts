@@ -1,6 +1,6 @@
 import {OfflineEngineRenderer, ProjectBundle, ProjectProfile, WavFile} from "@opendaw/studio-core"
 import {isDefined, Option, panic, Procedure, Progress, TimeSpan} from "@opendaw/lib-std"
-import {network, Promises} from "@opendaw/lib-runtime"
+import {Promises} from "@opendaw/lib-runtime"
 
 export namespace PublishMusic {
     export const publishMusic = async (profile: ProjectProfile, progress: Progress.Handler, log: Procedure<string>): Promise<string> => {
@@ -61,7 +61,7 @@ export namespace PublishMusic {
     export const deleteMusic = async (token: string): Promise<void> => {
         const formData = new FormData()
         formData.append("token", token)
-        const response = await network.defaultFetch("https://api.opendaw.studio/music/delete.php", {
+        const response = await fetch("https://api.opendaw.studio/music/delete.php", {
             method: "POST",
             body: formData
         })
