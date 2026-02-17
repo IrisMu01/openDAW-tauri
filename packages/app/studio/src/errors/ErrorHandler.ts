@@ -8,7 +8,7 @@ import {Dialogs} from "@/ui/components/dialogs.tsx"
 import {BuildInfo} from "@/BuildInfo"
 import {network} from "@opendaw/lib-runtime"
 
-const ExtensionPatterns = ["script-src blocked eval", "extension", "chrome-extension://", "blocked by CSP"]
+const ExtensionPatterns = ["script-src blocked eval", "extension", "chrome-extension://", "blocked by CSP", "Zotero Connector"]
 const IgnoredErrors = [
     "ResizeObserver loop completed with undelivered notifications.",
     "Request timeout appSettingsDistributor.getValue"

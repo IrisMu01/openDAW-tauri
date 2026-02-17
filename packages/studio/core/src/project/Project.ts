@@ -26,6 +26,8 @@ import {
     UserInterfaceBox
 } from "@opendaw/studio-boxes"
 import {
+    AnyRegionBoxAdapter,
+    AudioUnitBoxAdapter,
     BoxAdapters,
     BoxAdaptersContext,
     ClipSequencing,
@@ -38,6 +40,7 @@ import {
     ProcessorOptions,
     ProjectMandatoryBoxes,
     ProjectSkeleton,
+    RegionAdapters,
     RootBoxAdapter,
     SampleLoaderManager,
     SoundfontLoaderManager,
@@ -110,8 +113,8 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
 
     readonly rootBox: RootBox
     readonly userInterfaceBoxes: ReadonlyArray<UserInterfaceBox>
-    readonly masterBusBox: AudioBusBox
-    readonly masterAudioUnit: AudioUnitBox
+    readonly primaryAudioBusBox: AudioBusBox
+    readonly primaryAudioUnitBox: AudioUnitBox
     readonly timelineBox: TimelineBox
 
     readonly api: ProjectApi
@@ -119,6 +122,7 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
     readonly editing: BoxEditing
     readonly selection: VertexSelection
     readonly deviceSelection: FilteredSelection<DeviceBoxAdapter>
+    readonly regionSelection: FilteredSelection<AnyRegionBoxAdapter>
     readonly boxAdapters: BoxAdapters
     readonly userEditingManager: UserEditingManager
     readonly parameterFieldAdapters: ParameterFieldAdapters
@@ -136,16 +140,16 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
     private constructor(env: ProjectEnv, boxGraph: BoxGraph, {
         rootBox,
         userInterfaceBoxes,
-        primaryAudioBus,
-        primaryAudioOutputUnit,
+        primaryAudioBusBox,
+        primaryAudioUnitBox,
         timelineBox
     }: ProjectMandatoryBoxes) {
         this.#env = env
         this.boxGraph = boxGraph
         this.rootBox = rootBox
         this.userInterfaceBoxes = userInterfaceBoxes
-        this.masterBusBox = primaryAudioBus
-        this.masterAudioUnit = primaryAudioOutputUnit
+        this.primaryAudioBusBox = primaryAudioBusBox
+        this.primaryAudioUnitBox = primaryAudioUnitBox
         this.timelineBox = timelineBox
 
         this.api = new ProjectApi(this)
@@ -158,6 +162,13 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
             {
                 fx: (adapter: DeviceBoxAdapter) => adapter.box,
                 fy: vertex => this.boxAdapters.adapterFor(vertex.box, Devices.isAny)
+            }
+        ))
+        this.regionSelection = this.#terminator.own(this.selection.createFilteredSelection(
+            isVertexOfBox(UnionBoxTypes.isRegionBox),
+            {
+                fx: (adapter: AnyRegionBoxAdapter) => adapter.box,
+                fy: vertex => RegionAdapters.for(this.boxAdapters, vertex.box)
             }
         ))
         this.#timelineBoxAdapter = this.boxAdapters.adapterFor(this.timelineBox, TimelineBoxAdapter)
@@ -227,6 +238,13 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
         Recording.start(this, countIn).finally()
     }
 
+    stopRecording(): void {
+        this.engine.stopRecording()
+        this.editing.mark()
+    }
+
+    isRecording(): boolean {return Recording.isRecording}
+
     follow(box: UserInterfaceBox): void {
         this.userEditingManager.follow(box)
         this.midiLearning.followUser(box.midiControllers)
@@ -245,6 +263,9 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
     get clipSequencing(): ClipSequencing {return panic("Only available in audio context")}
     get isAudioContext(): boolean {return false}
     get isMainThread(): boolean {return true}
+    get primaryAudioUnitBoxAdapter(): AudioUnitBoxAdapter {
+        return this.boxAdapters.adapterFor(this.primaryAudioUnitBox, AudioUnitBoxAdapter)
+    }
     get liveStreamBroadcaster(): LiveStreamBroadcaster {return panic("Only available in audio context")}
 
     get skeleton(): ProjectSkeleton {
@@ -253,8 +274,8 @@ export class Project implements BoxAdaptersContext, Terminable, TerminableOwner 
             mandatoryBoxes: {
                 rootBox: this.rootBox,
                 timelineBox: this.timelineBox,
-                primaryAudioBus: this.masterBusBox,
-                primaryAudioOutputUnit: this.masterAudioUnit,
+                primaryAudioBusBox: this.primaryAudioBusBox,
+                primaryAudioUnitBox: this.primaryAudioUnitBox,
                 userInterfaceBoxes: this.userInterfaceBoxes
             }
         }

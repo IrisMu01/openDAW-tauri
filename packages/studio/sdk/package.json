@@ -1,6 +1,6 @@
 {
   "name": "@opendaw/studio-sdk",
-  "version": "0.0.103",
+  "version": "0.0.108",
   "license": "LGPL-3.0-or-later",
   "type": "module",
   "publishConfig": {
@@ -36,26 +36,26 @@
   "scripts": {
     "sync-version": "node scripts/sync-version.js",
     "build": "npm run sync-version && tsc",
-    "prepublishOnly": "npm run sync-version"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@opendaw/typescript-config": "^0.0.28"
+    "@opendaw/typescript-config": "^0.0.29"
   },
   "dependencies": {
-    "@opendaw/lib-box": "^0.0.71",
-    "@opendaw/lib-dawproject": "^0.0.56",
-    "@opendaw/lib-dom": "^0.0.72",
-    "@opendaw/lib-dsp": "^0.0.70",
-    "@opendaw/lib-fusion": "^0.0.76",
-    "@opendaw/lib-jsx": "^0.0.72",
-    "@opendaw/lib-midi": "^0.0.52",
-    "@opendaw/lib-runtime": "^0.0.68",
-    "@opendaw/lib-std": "^0.0.67",
-    "@opendaw/lib-xml": "^0.0.53",
-    "@opendaw/studio-adapters": "^0.0.81",
-    "@opendaw/studio-boxes": "^0.0.73",
-    "@opendaw/studio-core": "^0.0.102",
-    "@opendaw/studio-enums": "^0.0.62"
+    "@opendaw/lib-box": "^0.0.74",
+    "@opendaw/lib-dawproject": "^0.0.58",
+    "@opendaw/lib-dom": "^0.0.74",
+    "@opendaw/lib-dsp": "^0.0.72",
+    "@opendaw/lib-fusion": "^0.0.79",
+    "@opendaw/lib-jsx": "^0.0.74",
+    "@opendaw/lib-midi": "^0.0.54",
+    "@opendaw/lib-runtime": "^0.0.70",
+    "@opendaw/lib-std": "^0.0.69",
+    "@opendaw/lib-xml": "^0.0.55",
+    "@opendaw/studio-adapters": "^0.0.85",
+    "@opendaw/studio-boxes": "^0.0.76",
+    "@opendaw/studio-core": "^0.0.107",
+    "@opendaw/studio-enums": "^0.0.64"
   },
   "gitHead": "e4f70170c5947610932306da94e7f0bb817e43b3"
 }
