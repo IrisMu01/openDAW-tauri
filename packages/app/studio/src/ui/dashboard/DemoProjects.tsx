@@ -71,7 +71,7 @@ const loadDemoProject = async (service: StudioService, json: DemoProjectJson) =>
     const dialog = RuntimeNotifier.progress({headline: "Loading Demo Project"})
     const folder = json.id
     const {status, value: arrayBuffer, error} = await Promises.tryCatch(
-        fetch(`https://api.opendaw.studio/music/uploads/${folder}/project.odb`)
+        network.defaultFetch(`https://api.opendaw.studio/music/uploads/${folder}/project.odb`)
             .then(network.progress(progress => dialog.message = `Downloading bundle file... (${(progress * 100).toFixed(1)}%)`))
             .then(x => x.arrayBuffer()))
     dialog.terminate()

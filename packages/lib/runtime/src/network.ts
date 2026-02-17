@@ -12,11 +12,21 @@ import {
 } from "@opendaw/lib-std"
 import {Wait} from "./wait"
 
+let _fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response> = fetch;
+
 export namespace network {
+
     const limit = new Promises.Limit<Response>(4)
 
+    export const setTauriFetch = async (isTauriApp: boolean): Promise<void> => {
+        if (isTauriApp) {
+            const {fetch: tauriFetch} = await import("@tauri-apps/plugin-http")
+            _fetch = tauriFetch
+        }
+    }
+
     export const limitFetch = (input: RequestInfo | URL, init?: RequestInit): Promise<Response> =>
-        limit.add(() => fetch(input, init))
+        limit.add(() => _fetch(input, init))
 
     export const defaultRetry = (reason: unknown, count: int) => {
         return !isInstanceOf(reason, Errors.FileNotFound) || count <= 100
@@ -27,7 +37,7 @@ export namespace network {
         const wrap = isDefined(handler) ? progress(handler) : identity
         while (true) {
             try {
-                return wrap(await fetch(input, init))
+                return wrap(await _fetch(input, init))
             } catch (reason) {
                 if (isInstanceOf(reason, Errors.FileNotFound)) {throw reason}
                 if (navigator.onLine) {

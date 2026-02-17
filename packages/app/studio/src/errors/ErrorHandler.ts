@@ -6,6 +6,7 @@ import {ErrorInfo} from "@/errors/ErrorInfo.ts"
 import {Surface} from "@/ui/surface/Surface.tsx"
 import {Dialogs} from "@/ui/components/dialogs.tsx"
 import {BuildInfo} from "@/BuildInfo"
+import {network} from "@opendaw/lib-runtime"
 
 const ExtensionPatterns = ["script-src blocked eval", "extension", "chrome-extension://", "blocked by CSP"]
 const IgnoredErrors = [
@@ -159,7 +160,7 @@ export class ErrorHandler {
             error: {...error, stack: error.stack?.slice(0, maxStackSize)},
             logs: LogBuffer.get()
         } satisfies ErrorLog)
-        fetch("https://logs.opendaw.studio/log.php", {
+        network.defaultFetch("https://logs.opendaw.studio/log.php", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body

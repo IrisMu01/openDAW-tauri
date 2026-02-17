@@ -32,7 +32,7 @@ export class OpenSoundfontAPI {
     async load(uuid: UUID.Bytes, progress: Procedure<unitValue>): Promise<[ArrayBuffer, SoundfontMetaData]> {
         return this.get(uuid).then(async soundfont => {
             const url = `${OpenSoundfontAPI.FileRoot}/${soundfont.uuid}`
-            return fetch(url, OpenDAWHeaders)
+            return network.defaultFetch(url, OpenDAWHeaders)
                 .then(response => {
                     let loaded = 0
                     return new Promise<ArrayBuffer>((resolve, reject) => {
